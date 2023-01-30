@@ -1,0 +1,33 @@
+body {
+	background-color: #393939;
+	color: rgb(228, 228, 228);
+}
+
+input, textarea {
+	border: 1px solid rgb(228, 228, 228);
+	background-color: #393939;
+	color:rgb(228, 228, 228);
+}
+
+.mx-1rem {
+	margin: 1rem 0 1rem 0;
+}
+
+.my-1rem {
+	margin: 0 1rem 0 1rem;
+}
+
+.btn {
+	border: 1px solid rgb(228, 228, 228);
+	background-color: #393939;
+	color:rgb(228, 228, 228);
+}
+
+.btn:hover {
+	background-color: rgb(228, 228, 228);;
+	color: #393939;
+}
+
+.btn:active {
+	background-color: #ff9dff;
+}
