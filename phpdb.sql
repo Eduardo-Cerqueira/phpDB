@@ -2,6 +2,7 @@ CREATE TABLE
   `account` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `fullname` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
     `email` varchar(255) NOT NULL,
     `function` int(10) DEFAULT 0,
     `created_at` datetime DEFAULT current_timestamp(),
