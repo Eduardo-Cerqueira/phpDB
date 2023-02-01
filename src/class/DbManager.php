@@ -29,28 +29,17 @@ class DbManager
     {
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
-        switch ($objClass) {
-            case 'Account':
-                $sql = 'INSERT INTO account (';
-                break;
-            case 'Currency':
-                $sql = 'INSERT INTO currency (';
-                break;
-            case 'Transaction':
-                $sql = 'INSERT INTO transaction (';
-                break;
-            default:
-                break;
-        }
-
+        $sql = 'INSERT INTO ' . strtolower($objClass) . ' (';
         $limit = 0;
         foreach ($objVar as $key => $value) {
-            $sql .= " ' " . $key . " ' ";
+            if (!empty($dbObj->$key)) {
+                $sql .= $key ;
 
-            if ($limit != count($objVar) - 1) {
-                $sql .= ",";
+                if ($limit != count($objVar) - 1) {
+                    $sql .= ",";
+                }
+                $limit++;
             }
-            $limit++;
         }
 
         $limit = 0;
@@ -60,19 +49,19 @@ class DbManager
         $limit = 0;
         foreach ($objVar as $key => $value) {
             $sql .= " ' " . $value . " ' ";
-
-            if ($limit != count($objVar) - 1) {
-                $sql .= ",";
+            if (!empty($dbObj->$key)) {
+                if ($limit != count($objVar) - 1) {
+                    $sql .= ",";
+                }
+                $limit++;
             }
-            $limit++;
         }
 
         $sql .= ' )';
 
-        $sql .= " WHERE id = ? ";
         try {
             $sth = $this->db->prepare($sql);
-            $sth->execute([$objVar["id"]]);
+            $sth->execute();
         } catch (Exception $e) {
             echo $e;
         }
@@ -135,23 +124,7 @@ class DbManager
 
     function getById_advanced($id, string $className)
     {
-        $tableName = '';
-        switch ($className) {
-            case 'Account':
-                $tableName = 'account';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
-                break;
-            case 'Currency':
-                $tableName = 'currency';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
-                break;
-            case 'Transaction':
-                $tableName = 'transaction';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
-                break;
-            default:
-                break;
-        }
+        $sql = 'SELECT * from ' . strtolower($className) . ' WHERE id = ?';
 
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
@@ -167,23 +140,8 @@ class DbManager
     }
 
     function getBy_advanced(string $column, $value, string $className)
-    {
-        switch ($className) {
-            case 'Account':
-                $tableName = 'account';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
-                break;
-            case 'Currency':
-                $tableName = 'currency';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
-                break;
-            case 'Transaction':
-                $tableName = 'transaction';
-                $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
-                break;
-            default:
-                break;
-        }
+    {   
+        $sql = 'SELECT * from ' . strtolower($className) . ' WHERE ' . $column . ' = :value';
 
         var_dump($sql);
         $sth = $this->db->prepare($sql);
@@ -235,19 +193,7 @@ class DbManager
     {
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
-        switch ($objClass) {
-            case 'Account':
-                $sql = 'UPDATE account SET';
-                break;
-            case 'Currency':
-                $sql = 'UPDATE currency SET';
-                break;
-            case 'Transaction':
-                $sql = 'UPDATE transaction SET';
-                break;
-            default:
-                break;
-        }
+        $sql = 'SELECT * from ' . strtolower($objClass) . ' SET';
 
         $limit = 0;
         foreach ($objVar as $key => $value) {
