@@ -4,8 +4,8 @@ CREATE TABLE
     `fullname` varchar(255) NOT NULL,
     `email` varchar(255) NOT NULL,
     `function` int(10) DEFAULT 0,
-    `created_at` varchar(255) NOT NULL DEFAULT current_timestamp(),
-    `last_connection` varchar(255) NOT NULL DEFAULT current_timestamp(),
+    `created_at` datetime DEFAULT current_timestamp(),
+    `last_connection` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`),
     UNIQUE KEY `fullname` (`fullname`, `email`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
@@ -25,9 +25,9 @@ CREATE TABLE
     `type` varchar(255) NOT NULL,
     `emitter_id` varchar(255) NOT NULL,
     `receiver_id` varchar(255) NOT NULL,
-    `status` tinyint(1) DEFAULT NULL,
-    `processed` tinyint(1) NOT NULL,
-    `processed_at` varchar(255) NOT NULL,
-    `created_at` varchar(255) NOT NULL DEFAULT current_timestamp(),
+    `status` boolean DEFAULT NULL,
+    `processed` boolean NOT NULL,
+    `processed_at` datetime,
+    `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
