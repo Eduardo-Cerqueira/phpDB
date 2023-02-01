@@ -27,6 +27,55 @@ class DbManager
 
     function insert_advanced(DbObject $dbObj)
     {
+        $objClass = get_class($dbObj);
+        $objVar = get_object_vars($dbObj);
+        switch ($objClass) {
+            case 'Account':
+                $sql = 'INSERT INTO account (';
+                break;
+            case 'Currency':
+                $sql = 'INSERT INTO currency (';
+                break;
+            case 'Transaction':
+                $sql = 'INSERT INTO transaction (';
+                break;
+            default:
+                break;
+        }
+
+        $limit = 0;
+        foreach ($objVar as $key => $value) {
+            $sql .= " ' " . $key . " ' ";
+
+            if ($limit != count($objVar) - 1) {
+                $sql .= ",";
+            }
+            $limit++;
+        }
+
+        $limit = 0;
+
+        $sql .= ') VALUES (';
+
+        $limit = 0;
+        foreach ($objVar as $key => $value) {
+            $sql .= " ' " . $value . " ' ";
+
+            if ($limit != count($objVar) - 1) {
+                $sql .= ",";
+            }
+            $limit++;
+        }
+
+        $sql .= ' )';
+
+        $sql .= " WHERE id = ? ";
+        try {
+            $sth = $this->db->prepare($sql);
+            $sth->execute([$objVar["id"]]);
+        } catch (Exception $e) {
+            echo $e;
+        }
     }
 
     function select(string $sql, string $className, array $data = [])
@@ -88,12 +137,16 @@ class DbManager
     {
         $tableName = '';
         switch ($className) {
-            case 'ContactForm':
-                $tableName = 'contact_forms';
+            case 'Account':
+                $tableName = 'account';
                 $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
                 break;
-            case 'User':
-                $tableName = 'user';
+            case 'Currency':
+                $tableName = 'currency';
+                $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
+                break;
+            case 'Transaction':
+                $tableName = 'transaction';
                 $sql = 'SELECT * from ' . $tableName . ' WHERE id = ?';
                 break;
             default:
