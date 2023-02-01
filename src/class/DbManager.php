@@ -29,7 +29,20 @@ class DbManager
     {
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
-        $sql = 'INSERT INTO ' . strtolower($objClass) . ' (';
+        switch ($objClass) {
+            case 'Account':
+                $sql = 'INSERT INTO account (';
+                break;
+            case 'Currency':
+                $sql = 'INSERT INTO currency (';
+                break;
+            case 'Transaction':
+                $sql = 'INSERT INTO transaction (';
+                break;
+            default:
+                break;
+        }
+
         $limit = 0;
         foreach ($objVar as $key => $value) {
             if (!empty($dbObj->$key)) {
@@ -40,7 +53,9 @@ class DbManager
                 }
                 $limit++;
             }
+
         }
+        $sql = rtrim($sql, ',');
 
         $limit = 0;
 
@@ -48,23 +63,27 @@ class DbManager
 
         $limit = 0;
         foreach ($objVar as $key => $value) {
-            $sql .= " ' " . $value . " ' ";
             if (!empty($dbObj->$key)) {
+                $sql .= " '" . $value . "' ";
+
+
                 if ($limit != count($objVar) - 1) {
                     $sql .= ",";
                 }
                 $limit++;
             }
         }
+        $sql = rtrim($sql, ',');
 
         $sql .= ' )';
-
         try {
             $sth = $this->db->prepare($sql);
             $sth->execute();
         } catch (Exception $e) {
             echo $e;
         }
+
+
     }
 
     function select(string $sql, string $className, array $data = [])
