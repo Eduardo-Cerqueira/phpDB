@@ -9,7 +9,7 @@ function get_session_user() {
 
 function get_user_by_id($id) {
 	global $db;
-	$query = $db->prepare('SELECT * FROM users WHERE id = ?');
+	$query = $db->prepare('SELECT * FROM account WHERE id = ?');
 	$query->execute([$id]);
 	$query->setFetchMode(PDO::FETCH_ASSOC);
 	$user = $query->fetch();
