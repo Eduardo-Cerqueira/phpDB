@@ -1,0 +1,5 @@
+<h2>Utilisateurs :</h2>
+<?php
+    $all_user = $dbManager->select('SELECT * FROM contact_forms', [], 'ContactForm')
+?>
+
