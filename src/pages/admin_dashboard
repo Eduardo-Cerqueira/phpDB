@@ -1,5 +1,18 @@
 <h2>Utilisateurs :</h2>
 <?php
-    $all_user = $dbManager->select('SELECT * FROM contact_forms', [], 'ContactForm')
+    $dbManager->insert(
+        'INSERT INTO contact_forms(fullname, password, email) VALUES(?, ?, ?)',
+        ['Test fullname', '08020282924', 'test@test.com']
+    );
+    $dbManager->insert(
+        'INSERT INTO contact_forms(fullname, password, email) VALUES(?, ?, ?)',
+        ['Test fullname', '08020282924', 'test@test.com']
+    );
+    $dbManager->insert(
+        'INSERT INTO contact_forms(fullname, password, email) VALUES(?, ?, ?)',
+        ['Test fullname', '08020282924', 'test@test.com']
+    );
+
+    $all_user = $dbManager->select('SELECT * FROM contact_forms', [], 'Account')
 ?>
 
