@@ -116,12 +116,16 @@ class DbManager
     function getBy_advanced(string $column, $value, string $className)
     {
         switch ($className) {
-            case 'ContactForm':
-                $tableName = 'contact_forms';
+            case 'Account':
+                $tableName = 'account';
                 $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
                 break;
-            case 'User':
-                $tableName = 'user';
+            case 'Currency':
+                $tableName = 'currency';
+                $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
+                break;
+            case 'Transaction':
+                $tableName = 'transaction';
                 $sql = 'SELECT * from ' . $tableName . ' WHERE ' . $column . ' = :value';
                 break;
             default:
@@ -135,8 +139,6 @@ class DbManager
             'value' => $value
         ]);
         $data = $sth->fetch();
-
-        var_dump($sth);
 
         $dataReturn = new $className;
         var_dump($data);
@@ -181,11 +183,14 @@ class DbManager
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
         switch ($objClass) {
-            case 'ContactForm':
-                $sql = 'UPDATE contact_forms SET';
+            case 'Account':
+                $sql = 'UPDATE account SET';
                 break;
-            case 'User':
-                $sql = 'UPDATE user SET';
+            case 'Currency':
+                $sql = 'UPDATE currency SET';
+                break;
+            case 'Transaction':
+                $sql = 'UPDATE transaction SET';
                 break;
             default:
                 break;
@@ -208,9 +213,5 @@ class DbManager
         } catch (Exception $e) {
             echo $e;
         }
-
-        var_dump($sql);
-
-        var_dump($objVar);
     }
 }
