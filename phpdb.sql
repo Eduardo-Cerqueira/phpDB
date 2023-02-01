@@ -31,7 +31,7 @@ CREATE TABLE `account` (
   `id` int(11) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `function` int(10) NOT NULL,
+  `function` int(10) DEFAULT 0,
   `created_at` varchar(255) NOT NULL DEFAULT current_timestamp(),
   `last_connection` varchar(255) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
