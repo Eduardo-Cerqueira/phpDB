@@ -17,7 +17,7 @@ require_once __DIR__ . '/../src/partials/header.php'; ?>
 		echo '<p>'.$errors.'</p>';
 	} ?>
 	<form action="/actions/register.php" method="post">
-		Pseudo : <input type="text" name="pseudo"><br>
+		Pseudo : <input type="text" name="fullname"><br>
 		Email : <input type="text" name="email"><br>
 		Password : <input type="password" name="password"><br>
 		C.Password : <input type="password" name="cpassword"><br>
