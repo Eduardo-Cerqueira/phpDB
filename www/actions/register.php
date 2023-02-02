@@ -35,8 +35,6 @@ $new_account->password = $_POST['password'];
 
 $idInsertedAdvanced = $dbManager->insert_advanced($new_account);
 
-var_dump($idInsertedAdvanced);
-
 
 // bonus : si on veut connecte l'utilisateur immediatement
 $_SESSION['user_id'] = $db->lastInsertId();
