@@ -22,6 +22,18 @@ if (empty($_POST['password']) || ($_POST['password'] !== $_POST['cpassword'])) {
 $_POST['fullname'] = htmlentities($_POST['fullname'],  ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 $_POST['password'] = hash('sha256', $_POST['password']);
 
+#genération iban
+function genereriban(){
+ $caracter = '0123456789';
+ $chaine = 'FR';
+ for ($i = 0; $i < 25; ++$i) {
+ $chaine .= $caracter[rand(0, 9)];
+ }
+ return $chaine;
+}
+
+
+
 // retirer cpassword de $_POST
 unset($_POST['cpassword']);
 
@@ -32,8 +44,15 @@ $new_account = new Account();
 $new_account->fullname = $_POST['fullname'];
 $new_account->email = $_POST['email'];
 $new_account->password = $_POST['password'];
+$new_account->IBAN = genereriban();
+try{
+	$idInsertedAdvanced = $dbManager->insert_advanced($new_account);
+}catch(PDOException $e){
+	$new_account->IBAN = null;
+	$new_account->IBAN = genereriban();
+}
 
-$idInsertedAdvanced = $dbManager->insert_advanced($new_account);
+
 
 
 // bonus : si on veut connecte l'utilisateur immediatement
