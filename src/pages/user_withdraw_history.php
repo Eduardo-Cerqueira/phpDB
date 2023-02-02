@@ -2,7 +2,7 @@
 
 <?php
 
-$all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? ', 'Transactions', ['retrait']);
+$all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND id = ?', 'Transactions', ['retrait', $user["id"]]);
 ?>
 <form action="/actions/valid_depot.php" method="post">
     <?php if ($all_transac) { ?>
@@ -42,5 +42,5 @@ $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? ', 
             </tbody>
         </table>
     <?php } else {
-        echo "<p> Vous n'avez aucun retrait </p>";
+        echo "<p> Vous n'avez aucun retraits :) </p>";
     } ?>
