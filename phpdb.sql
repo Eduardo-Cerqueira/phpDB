@@ -32,6 +32,7 @@ CREATE TABLE
     `receiver_currency` varchar(255) NOT NULL,
     `status` boolean DEFAULT NULL,
     `processed` boolean NOT NULL,
+    `processed_by` varchar(255) NOT NULL,
     `processed_at` datetime,
     `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
