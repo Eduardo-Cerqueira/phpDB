@@ -1,13 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
-
+/*
 function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_currency, $receiver_id, $receiver_amount, $receiver_currency) {
-    require_once __DIR__ . '/../src/init.php';
-    $idInserted = $dbManager->insert(
+    $dbManager->insert(
         'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
         [$type, $emitter_id, $emitter_amount, $emitter_currency, $receiver_id, $receiver_amount, $receiver_currency]
     );}
-
+*/
 ?>
 
 <h2>Transaction Form</h2>
@@ -33,29 +32,22 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
     <input type="radio" name="type_transaction" value="retrait">Retrait
     <input type="radio" name="type_transaction" value="transfer">Transfer
     <br><br>
-    <input type="submit" name="submit" value="Submit">  
+    <input type="submit" name="submit" value="Submit">
 </form>
 
 <?php
 
 if ($_POST['type_transaction' == 'transfer']) {
-    requestTransaction($_POST['type_transaction'], 1 , $_POST['amount'], $_POST['Currency'], $_POST['id'], $_POST['amount'], $_POST['Currency']);
+    // add iban
+    $dbManager->insert(
+        'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
+        [$_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']]
+    );
 }
 else {
-    requestTransaction($_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']);
+    // add iban
+    $dbManager->insert(
+        'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
+        [$_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']]
+    );
 }
-
-echo($_POST['Currency']);
-?>
-<br>
-<?php
-echo($_POST['type_transaction']);
-?>
-<br>
-<?php
-echo($_POST['amount']);
-?>
-<br>
-<?php
-echo($_POST['id']);
-?>
