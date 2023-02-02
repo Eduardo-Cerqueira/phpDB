@@ -7,6 +7,10 @@ require_once __DIR__ . '/../src/partials/header.php';
 
 $id = 1;
 $i = 0;
+echo("Top 10");
+?>
+<br><br>
+<?php
 $forms = $dbManager->select('SELECT * FROM transaction WHERE (emitter_id = ? AND receiver_id = ?) OR emitter_id = ? OR receiver_id = ?', 'Transaction', [$id,$id,$id,$id]);
 foreach ($forms as $key => $value) {
     if ($i < 10) {
