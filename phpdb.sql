@@ -41,13 +41,10 @@ CREATE TABLE
   CREATE TABLE
   `transfers` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `type` varchar(255) NOT NULL,
     `sender` varchar(255) DEFAULT NULL,
     `receiver` varchar(255) DEFAULT NULL,
     `amount` varchar(255) NOT NULL,
     `currency` varchar(255) NOT NULL,
-    `gain` tinyint(1) NOT NULL,
-    `status` tinyint(1) DEFAULT NULL,
     `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB AUTO_INCREMENT = 15 DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
