@@ -31,10 +31,10 @@ CREATE TABLE
     `receiver_id` varchar(255) NOT NULL,
     `receiver_amount` varchar(255) NOT NULL,
     `receiver_currency` varchar(255) NOT NULL,
-    `status` boolean DEFAULT NULL,
-    `processed` boolean NOT NULL,
-    `processed_by` varchar(255) NOT NULL,
-    `processed_at` datetime,
+    `status` tinyint(1) DEFAULT NULL,
+    `processed` tinyint(1) DEFAULT 0,
+    `processed_at` datetime DEFAULT NULL,
     `created_at` datetime DEFAULT current_timestamp(),
+    `processed_by` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
-  ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
+  ) ENGINE = InnoDB AUTO_INCREMENT = 15 DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
