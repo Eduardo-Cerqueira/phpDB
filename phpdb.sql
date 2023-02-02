@@ -5,6 +5,7 @@ CREATE TABLE
     `password` varchar(255) NOT NULL,
     `email` varchar(255) NOT NULL,
     `function` int(10) DEFAULT 0,
+    `IBAN` varchar(27) NOT NULL,
     `created_at` datetime DEFAULT current_timestamp(),
     `last_connection` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`),
