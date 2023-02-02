@@ -11,7 +11,7 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
 
 <h2>Transaction Form</h2>
 <form id="T" method="post">
-    Account : <input type="number" name="id">
+    IBAN : <input type="text" name="iban">
     <br><br>
     Amount : <input type="number"  name="amount">
     <br><br>
@@ -38,15 +38,13 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
 <?php
 
 if ($_POST['type_transaction'] == 'transfer') {
-    // add iban
     $dbManager->insert(
-        'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
-        [$_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']]
+        'INSERT INTO transfers(sender, receiver, amount, currency) VALUES(?, ?, ?, ?)',
+        [$user['IBAN'], $_POST['iban'], $_POST['amount'], $_POST['Currency']]
     );}
 else {
-    // add iban
     $dbManager->insert(
-        'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
-        [$_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']]
+        'INSERT INTO transactions(type, user_id, amount , currency) VALUES(?, ?, ?, ?)',
+        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['Currency']]
     );
 }
