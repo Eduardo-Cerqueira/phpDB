@@ -23,10 +23,10 @@ $sendMoney = $dbManager->select("SELECT * FROM transfers WHERE sender = ?", 'Tra
 //Via Transactions
 
 //récupération des profits
-$depositMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'depot'", 'Transactions', [$user['id']]);
+$depositMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'depot' AND status = 1", 'Transactions', [$user['id']]);
 
 //récupération des deficits
-$withdrawMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'retrait'", 'Transactions', [$user['id']]);
+$withdrawMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'retrait' AND status = 1", 'Transactions', [$user['id']]);
 
 
 
