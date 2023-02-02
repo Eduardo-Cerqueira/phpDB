@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
-
 if ($user_id === false) {
 	header('Location: /login.php');
 	die();

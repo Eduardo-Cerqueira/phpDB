@@ -38,3 +38,12 @@ CREATE TABLE
     `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
+
+  CREATE TABLE
+  `roles` (
+    `admin` int(1000) NOT NULL,
+    `manager` int(200) NOT NULL,
+    `non_verified_user` int(1) NOT NULL,
+    `verified_user` int(10) NOT NULL,
+    `banned_user` int(0) NOT NULL,
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci

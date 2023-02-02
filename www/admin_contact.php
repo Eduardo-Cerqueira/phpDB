@@ -24,6 +24,9 @@ echo '</pre>';
 	<title>Admin Contacts</title>
 	<link rel="stylesheet" href="assets/style.css">
 </head>
+<?php
+
+?>
 <body>
 	<?php
 	foreach($forms as $form) {
