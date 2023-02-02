@@ -57,8 +57,8 @@ require_once __DIR__ . '/../src/partials/header.php';
                     <?php } ?>
 
                 </tbody>
-                <button type="submit">Valider</button>
             </table>
+            <button type="submit">Valider</button>
         <?php } else {
         echo "<p> Vous n'avez aucun utilisateurs à confirmer ! </p>";
     } ?>
