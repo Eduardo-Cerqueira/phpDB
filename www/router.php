@@ -1,34 +1,45 @@
 <?php
+require_once __DIR__ . '/../src/init.php';
 
+$pageTitles = [
+	'login' => 'www/login.php',
+	'register' => 'www/register.php',
+	'home' => 'pages/home.php',
+	'contact' => 'pages/contact.php'
+];
 
+// pages accessibles si on est pas co
+$guest_pages = ['login', 'register'];
+// pages accessibles si on est co:
+$loggedin_pages = ['home'];
+// pages qui sont accessibles a tous
+$everyone_pages = ['contact'];
 
+// page par defaut si on est co ou pas
+if ($user_id === false) {
+	$pageName = 'login';
+}
+else{
+	$pageName = 'home';
+}
 
-    $url = parse_url($_SERVER['REQUEST_URL'])['path'];
+// verifier le contenu de $_GET['page'] ou $_GET['name']
+if ($user_id !== false && in_array($_GET['name'], $loggedin_pages)) {
+	$pageName = $_GET["name"];
+}
+elseif ($user_id === false && in_array($_GET['name'], $guest_pages)) {
+	$pageName = $_GET['name'];
+}
+elseif (in_array($_GET['name'], $everyone_pages)) {
+	$pageName = $_GET['name'];
+}
 
-    $routes = [
-        '/' => 'pages/home.php',
-        '/' => 'pages/contact.php',
-        '/' => 'pages/login.php',
-        '/' => 'www/index.php',
-        '/' => 'www/login.php',
+$page_title = $pageTitles[$pageName];
 
-    ];
-    function routeToPages($url, $routes) {
-        if(array_key_exists($url, $routes)) {
-            require $routes[$url];
-        } else {
-            abort();
-        }
-    }
-    function abort($code = 404) {
-        http_response_code($code);
-
-        require "partials/{$code}.php";
-
-        die();
-    }
-
-
-
-
-?>
+require_once __DIR__ . '/../src/partials/header.php'; ?>
+<body>
+    <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
+    <?php require_once __DIR__ . '/../src/pages/' . $pageName . '.php'; ?>
+    <?php require_once __DIR__ . '/../src/partials/footer.php'; ?>
+</body>
+</html>
