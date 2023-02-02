@@ -5,7 +5,7 @@ class Account extends DbObject {
 	public $fullname;
 	public $password;
 	public $email;
-	public $IBAN
+	public $IBAN;
 	public $function;
 	public $created_at;
     public $last_connection;
