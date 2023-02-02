@@ -82,37 +82,41 @@ require_once __DIR__ . '/../src/partials/header.php';
         $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND processed = 0', 'Transactions', ['depot']);
         ?>
         <form action="/actions/valid_depot.php" method="post">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Type</th>
-                        <th>Utilisateur</th>
-                        <th>Montant</th>
-                        <th>Devise</th>
-                        <th>Valider</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($all_transac as $transac) { ?>
+            <?php if ($all_transac) { ?>
+                <table>
+                    <thead>
                         <tr>
-                            <?php foreach ($transac as $key => $value) {
-
-                                if ($key != 'created_at' && $key != 'status' && $key != 'processed' && $key != 'processed_at'  && $key != 'processed_by') {
-                                    echo "<td>$value</td>";
-                                }
-                            }
-
-                            ?>
-                            <td><button type="submit" name="yes" value=<?php echo ($transac->id) ?>>Oui</button>
-                                <button type="submit" name="no" value=<?php echo ($transac->id) ?>>Non</button>
-                            </td>
-
+                            <th>Id</th>
+                            <th>Type</th>
+                            <th>Utilisateur</th>
+                            <th>Montant</th>
+                            <th>Devise</th>
+                            <th>Valider</th>
                         </tr>
-                    <?php } ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($all_transac as $transac) { ?>
+                            <tr>
+                                <?php foreach ($transac as $key => $value) {
 
-                </tbody>
-            </table>
+                                    if ($key != 'created_at' && $key != 'status' && $key != 'processed' && $key != 'processed_at'  && $key != 'processed_by') {
+                                        echo "<td>$value</td>";
+                                    }
+                                }
+
+                                ?>
+                                <td><button type="submit" name="yes" value=<?php echo ($transac->id) ?>>Oui</button>
+                                    <button type="submit" name="no" value=<?php echo ($transac->id) ?>>Non</button>
+                                </td>
+
+                            </tr>
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+            <?php } else {
+                echo "<p> Vous n'avez aucun depots à confirmer ! </p>";
+            } ?>
         </form>
 
         <?php require_once __DIR__ . '/../src/partials/footer.php'; ?>
