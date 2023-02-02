@@ -29,19 +29,7 @@ class DbManager
     {
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
-        switch ($objClass) {
-            case 'Account':
-                $sql = 'INSERT INTO account (';
-                break;
-            case 'Currency':
-                $sql = 'INSERT INTO currency (';
-                break;
-            case 'Transaction':
-                $sql = 'INSERT INTO transaction (';
-                break;
-            default:
-                break;
-        }
+        $sql = 'INSERT INTO ' . strtolower($objClass). ' (';
 
         $limit = 0;
         foreach ($objVar as $key => $value) {
@@ -53,7 +41,7 @@ class DbManager
                 }
                 $limit++;
             }
-
+            
         }
         $sql = rtrim($sql, ',');
 
@@ -65,7 +53,7 @@ class DbManager
         foreach ($objVar as $key => $value) {
             if (!empty($dbObj->$key)) {
                 $sql .= " '" . $value . "' ";
-
+            
 
                 if ($limit != count($objVar) - 1) {
                     $sql .= ",";
@@ -83,7 +71,7 @@ class DbManager
             echo $e;
         }
 
-
+        
     }
 
     function select(string $sql, string $className, array $data = [])
@@ -143,7 +131,7 @@ class DbManager
 
     function getById_advanced($id, string $className)
     {
-        $sql = 'SELECT * from ' . strtolower($className) . ' WHERE id = ?';
+        $sql = 'INSERT INTO ' . strtolower($className). ' (';
 
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
@@ -160,9 +148,9 @@ class DbManager
 
     function getBy_advanced(string $column, $value, string $className)
     {   
+
         $sql = 'SELECT * from ' . strtolower($className) . ' WHERE ' . $column . ' = :value';
 
-        var_dump($sql);
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute([
@@ -171,7 +159,6 @@ class DbManager
         $data = $sth->fetch();
 
         $dataReturn = new $className;
-        var_dump($data);
         foreach ($data as $key => $value) {
             $dataReturn->$key = $value;
         }
@@ -212,8 +199,7 @@ class DbManager
     {
         $objClass = get_class($dbObj);
         $objVar = get_object_vars($dbObj);
-        $sql = 'SELECT * from ' . strtolower($objClass) . ' SET';
-
+        $sql = 'UPDATE ' . strtolower($objClass). ' SET';
         $limit = 0;
         foreach ($objVar as $key => $value) {
             $sql .= ' ' . $key . " = '" . $value . "'";
