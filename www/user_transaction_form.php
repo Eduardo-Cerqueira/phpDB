@@ -16,7 +16,7 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
     Amount : <input type="number"  name="amount">
     <br><br>
     Currency : 
-    <select name="currency">
+    <select name="Currency">
         Currency:
         <?php
         $forms = $dbManager->select('SELECT name FROM currency', 'Currency', []);
@@ -40,11 +40,11 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
 if ($_POST['type_transaction'] == 'transfer') {
     $dbManager->insert(
         'INSERT INTO transfers(sender, receiver, amount, currency) VALUES(?, ?, ?, ?)',
-        [$user['IBAN'], $_POST['iban'], $_POST['amount'], $_POST['currency']]
+        [$user['IBAN'], $_POST['iban'], $_POST['amount'], $_POST['Currency']]
     );}
 else {
     $dbManager->insert(
         'INSERT INTO transactions(type, user_id, amount , currency) VALUES(?, ?, ?, ?)',
-        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['currency']]
+        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['Currency']]
     );
 }
