@@ -53,8 +53,6 @@ try{
 }
 
 
-
-
 // bonus : si on veut connecte l'utilisateur immediatement
 $_SESSION['user_id'] = $db->lastInsertId();
 set_errors('email ou pseudo déjà existant', '/register.php');
