@@ -1,40 +1,56 @@
 <h2>Récapitulatif de votre compte :</h2>
 
 <?php
-    echo "<h3> IBAN : $user[IBAN] </h3>";
+echo "<h3> IBAN : $user[IBAN] </h3>";
 
-    //récupération de toutes les currency dispo sur le site
-    $all_currency = array();
-    $db_currency = $dbManager->select("SELECT * FROM currency", 'Currency');
+//récupération de toutes les currency dispo sur le site
+$all_currency = array();
+$db_currency = $dbManager->select("SELECT * FROM currency", 'Currency');
 
-    foreach ($db_currency as $key => $currency) {
-        $all_currency[$currency->name] = 0;
-    }
+foreach ($db_currency as $key => $currency) {
+    $all_currency[$currency->name] = 0;
+}
+//calcul des soldes
 
-    var_dump($all_currency);
+//Via Transfers
 
-    //calcul des soldes
+//récupération des profits
+$receiviedMoney = $dbManager->select("SELECT * FROM transfers WHERE receiver = ?", 'Transfers', [$user['IBAN']]);
 
-    //récupération des profits
-    $receiviedMoney = $dbManager->select("SELECT * FROM transfers WHERE receiver = ?", 'Transfers',[$user['IBAN']]);
-    var_dump($receiviedMoney);
+//récupération des deficits
+$sendMoney = $dbManager->select("SELECT * FROM transfers WHERE sender = ?", 'Transfers', [$user['IBAN']]);
 
-    //récupération des deficits
-    $sendMoney = $dbManager->select("SELECT * FROM transfers WHERE sender = ?", 'Transfers',[$user['IBAN']]);
+//Via Transactions
 
-    echo "<p> Vous avez :<p>";
+//récupération des profits
+$depositMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'depot'", 'Transactions', [$user['id']]);
 
-    foreach ($receiviedMoney as $key => $value) {
-        $all_currency[$value->currency] += intval($value->amount);
-    }
+//récupération des deficits
+$withdrawMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'retrait'", 'Transactions', [$user['id']]);
 
-    foreach ($sendMoney as $key => $value) {
-        $all_currency[$value->currency] -= intval($value->amount);
-    }
 
-    foreach ($all_currency as $key => $value) {
-        echo $value .' ' .$key;
-        echo "<br>";
-    }
 
+echo "<p> Vous avez :<p>";
+
+foreach ($receiviedMoney as $key => $value) {
+    $all_currency[$value->currency] += intval($value->amount);
+}
+
+foreach ($depositMoney as $key => $value) {
+    $all_currency[$value->currency] += intval($value->amount);
+}
+
+foreach ($withdrawMoney as $key => $value) {
+    $all_currency[$value->currency] -= intval($value->amount);
+}
 ?>
+
+<ul>
+    <?php
+    foreach ($all_currency as $key => $value) {
+    ?>
+        <li>
+            <?php echo $value . ' ' . $key; ?>
+        </li>
+    <?php }?>
+</ul>

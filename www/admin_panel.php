@@ -35,6 +35,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                         <th>IBAN</th>
                         <th>Function</th>
                         <th>Last connection</th>
+                        <th>Valider</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,10 +58,10 @@ require_once __DIR__ . '/../src/partials/header.php';
 
                 </tbody>
             </table>
-            <?php } else {
-                echo "<p> Vous n'avez aucun utilisateurs à confirmer ! </p>";
-            } ?>
-            <button type="submit">Valider</button>
+        <?php } else {
+        echo "<p> Vous n'avez aucun utilisateurs à confirmer ! </p>";
+    } ?>
+        <button type="submit">Valider</button>
         </form>
 
         <h2>Dépôts à confirmer :</h2>
@@ -78,42 +79,41 @@ require_once __DIR__ . '/../src/partials/header.php';
     $new_transacdepot->processed = 1;
 */
 
-        $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ?', 'Transactions', ['depot']);
+        $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND processed = 0', 'Transactions', ['depot']);
         ?>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Type</th>
-                    <th>Utilisateur</th>
-                    <th>Montant</th>
-                    <th>Devise</th>
-                    <th>Status</th>
-                    <th>Validé</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($all_transac as $transac) { ?>
+        <form action="/actions/valid_depot.php" method="post">
+            <table>
+                <thead>
                     <tr>
-                        <?php foreach ($transac as $key => $value) {
-                            /*if ($key == 'emitter_id') {
-                        $name = $dbManager->getById_advanced($transac->emitter_id,'Account');
-                        echo '<td>'. $name->fullname . '</td>';
-                    }elseif($key == 'receiver_id') {
-                        $name = $dbManager->getById_advanced($transac->receiver_id,'Account');
-                        echo '<td>'. $name->fullname . '</td>';
-                    }else*/
-                            if ($key != 'created_at') {
-                                echo "<td>$value</td>";
-                            }
-                        }
-                        ?>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Utilisateur</th>
+                        <th>Montant</th>
+                        <th>Devise</th>
+                        <th>Valider</th>
                     </tr>
-                <?php } ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($all_transac as $transac) { ?>
+                        <tr>
+                            <?php foreach ($transac as $key => $value) {
 
-            </tbody>
-        </table>
+                                if ($key != 'created_at' && $key != 'status' && $key != 'processed' && $key != 'processed_at'  && $key != 'processed_by') {
+                                    echo "<td>$value</td>";
+                                }
+                            }
+
+                            ?>
+                            <td><button type="submit" name="yes" value=<?php echo ($transac->id) ?>>Oui</button>
+                                <button type="submit" name="no" value=<?php echo ($transac->id) ?>>Non</button>
+                            </td>
+
+                        </tr>
+                    <?php } ?>
+
+                </tbody>
+            </table>
+        </form>
+
         <?php require_once __DIR__ . '/../src/partials/footer.php'; ?>
 </body>
