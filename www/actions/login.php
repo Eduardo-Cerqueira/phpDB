@@ -16,15 +16,14 @@ $password = hash('sha256', $_POST['password']);
 // var_dump($_POST);
 // die();
 
-$query = $db->prepare('SELECT * FROM account WHERE email = ?');
-$query->execute([$_POST['email']]);
-$query->setFetchMode(PDO::FETCH_ASSOC);
-$user = $query->fetch();
+$getby =  $dbManager->getBy('account','email',$_POST['email'],'Account');
 
-if ($user['password'] !== $password) {
-	set_errors('Mauvais mot de passe ou email incorrect', '/login.php');
+
+if ($getby->password !== $password) {
+	
+	set_errors('Mauvais mot de passe', '/login.php');
 }
 
-$_SESSION['user_id'] = $user['id'];
+$_SESSION['user_id'] = $getby->id;
 
 header('Location: /login.php');
