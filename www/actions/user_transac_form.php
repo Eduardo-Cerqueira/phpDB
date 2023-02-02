@@ -1,0 +1,16 @@
+<?php
+require_once __DIR__ . '/../../src/init.php';
+
+if ($_POST['type_transaction'] == 'transfer') {
+    $dbManager->insert(
+        'INSERT INTO transfers(sender, receiver, amount, currency) VALUES(?, ?, ?, ?)',
+        [$user['IBAN'], $_POST['iban'], $_POST['amount'], $_POST['Currency']]
+    );}
+else {
+    $dbManager->insert(
+        'INSERT INTO transactions(type, user_id, amount , currency) VALUES(?, ?, ?, ?)',
+        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['Currency']]
+    );
+}
+
+header("Location: /../user_panel.php");

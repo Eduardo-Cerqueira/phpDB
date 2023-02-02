@@ -36,5 +36,5 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
             </tbody>
         </table>
     <?php } else {
-        echo "<p> Vous n'avez aucun depots :(</p>";
+        echo "<p> Vous n'avez aucun tranferts :|</p>";
     } ?>
