@@ -10,6 +10,10 @@
 			<li>
 				<a href="/admin_panel.php">Admin panel</a>
 			</li>
+		<?php }else{ ?>
+			<li>
+				<a href="/user_panel.php">User panel</a>
+			</li>
 		<?php } ?>
 		<li>
 			<a href="/actions/logout.php">Logout</a>
