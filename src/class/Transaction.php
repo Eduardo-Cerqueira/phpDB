@@ -11,8 +11,9 @@ class Transaction extends DbObject {
     public $receiver_currency;
 	public $status;
 	public $processed;
-	public $created_at;
     public $processed_at;
+    public $processed_by;
+	public $created_at;
 }
 
 ?>
