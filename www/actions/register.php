@@ -32,6 +32,7 @@ $new_account = new Account();
 $new_account->fullname = $_POST['fullname'];
 $new_account->email = $_POST['email'];
 $new_account->password = $_POST['password'];
+$new_account->IBAN = "FR96334441321";
 
 $idInsertedAdvanced = $dbManager->insert_advanced($new_account);
 

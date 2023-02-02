@@ -32,6 +32,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                         <th>Id</th>
                         <th>Fullname</th>
                         <th>Email</th>
+                        <th>IBAN</th>
                         <th>Function</th>
                         <th>Last connection</th>
                     </tr>
@@ -77,7 +78,7 @@ require_once __DIR__ . '/../src/partials/header.php';
     $new_transacdepot->processed = 1;
 */
 
-        $all_transac = $dbManager->select('SELECT * FROM transaction WHERE type = ?', 'Transaction', ['depot']);
+        $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ?', 'Transactions', ['depot']);
         ?>
 
         <table>
