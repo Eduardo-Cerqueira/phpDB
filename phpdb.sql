@@ -8,7 +8,8 @@ CREATE TABLE
     `created_at` datetime DEFAULT current_timestamp(),
     `last_connection` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`),
-    UNIQUE KEY `fullname` (`fullname`, `email`)
+    UNIQUE KEY `fullname` (`fullname`),
+    UNIQUE KEY `email` (`email`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
 
   CREATE TABLE
