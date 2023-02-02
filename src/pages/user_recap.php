@@ -28,8 +28,6 @@ $depositMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ?
 //récupération des deficits
 $withdrawMoney = $dbManager->select("SELECT * FROM transactions WHERE user_id = ? AND type = 'retrait' AND status = 1", 'Transactions', [$user['id']]);
 
-
-
 echo "<p> Vous avez :<p>";
 
 foreach ($receiviedMoney as $key => $value) {
@@ -38,6 +36,10 @@ foreach ($receiviedMoney as $key => $value) {
 
 foreach ($depositMoney as $key => $value) {
     $all_currency[$value->currency] += intval($value->amount);
+}
+
+foreach ($sendMoney as $key => $value) {
+    $all_currency[$value->currency] -= intval($value->amount);
 }
 
 foreach ($withdrawMoney as $key => $value) {

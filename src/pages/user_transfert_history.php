@@ -20,9 +20,12 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
                     <tr>
                         <?php foreach ($transfer as $key => $value) {
                             if ($key == 'sender') {
-                                
-                            }
-                           if ($key != 'created_at' && $key != 'type' && $key != 'id') {
+                                $senderName = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];
+                                echo "<td>$senderName->fullname</td>";
+                            }elseif($key == 'receiver'){
+                                $receiver = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];
+                                echo "<td>$receiver->fullname</td>";
+                            }elseif ($key != 'created_at' && $key != 'type' && $key != 'id') {
                                 echo "<td>$value</td>";
                             }
                         }

@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../src/init.php';
-$db = $dbManager;
 
 if (isset($_POST['yes'])) {
     $status = 1;
@@ -12,4 +11,5 @@ else if (isset($_POST['no'])) {
 }
 $dbManager->update('transactions',['processed_at' => date('Y-m-d H:i:s'), 'status' => $status, 'processed_by' => $user['fullname'], 'processed' => 1], $id);
 header("Location: /../admin_panel.php");
+
 ?>
