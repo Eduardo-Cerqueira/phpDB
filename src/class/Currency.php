@@ -1,6 +1,6 @@
 <?php
 
-class Account extends DbObject {
+class Currency extends DbObject {
     public $id;
 	public $name;
 	public $multiplier;
