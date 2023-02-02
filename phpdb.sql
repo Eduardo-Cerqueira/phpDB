@@ -28,7 +28,7 @@ CREATE TABLE
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `type` varchar(255) NOT NULL,
     `user_id` varchar(255) NOT NULL,
-    `amount` varchar(255) NOT NULL,
+    `amount` int(255) NOT NULL,
     `currency` varchar(255) NOT NULL,
     `status` tinyint(1) DEFAULT NULL,
     `processed` tinyint(1) DEFAULT 0,
@@ -43,7 +43,7 @@ CREATE TABLE
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `sender` varchar(255) DEFAULT NULL,
     `receiver` varchar(255) DEFAULT NULL,
-    `amount` varchar(255) NOT NULL,
+    `amount` int(255) NOT NULL,
     `currency` varchar(255) NOT NULL,
     `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
