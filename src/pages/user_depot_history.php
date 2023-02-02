@@ -9,7 +9,6 @@ $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? ', 
         <table>
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Montant</th>
                     <th>Devise</th>
                     <th>Status</th>
@@ -31,7 +30,7 @@ $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? ', 
                                         echo "<td>En cours</td>";
                                         break;
                                 }
-                            } elseif ($key == 'id' || $key == 'amount' || $key == 'currency' || $key == 'status') {
+                            } elseif ($key == 'amount' || $key == 'currency' || $key == 'status') {
                                 echo "<td>$value</td>";
                             }
                         }

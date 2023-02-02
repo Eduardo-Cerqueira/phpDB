@@ -153,7 +153,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                     </tbody>
                 </table>
             <?php } else {
-                echo "<p> Vous n'avez aucun depots à confirmer ! </p>";
+                echo "<p> Vous n'avez aucun retraits à confirmer ! </p>";
             } ?>
         </form>
 

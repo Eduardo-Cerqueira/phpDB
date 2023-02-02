@@ -9,7 +9,6 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
         <table>
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Expediteur</th>
                     <th>Destinataire</th>
                     <th>Montant</th>
@@ -23,7 +22,7 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
                             if ($key == 'sender') {
                                 
                             }
-                           if ($key != 'created_at' && $key != 'type') {
+                           if ($key != 'created_at' && $key != 'type' && $key != 'id') {
                                 echo "<td>$value</td>";
                             }
                         }
