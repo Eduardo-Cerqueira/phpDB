@@ -37,13 +37,12 @@ function requestTransaction($type, $emitter_id, $emitter_amount, $emitter_curren
 
 <?php
 
-if ($_POST['type_transaction' == 'transfer']) {
+if ($_POST['type_transaction'] == 'transfer') {
     // add iban
     $dbManager->insert(
         'INSERT INTO transaction(type, emitter_id, emitter_amount ,emitter_currency, receiver_id, receiver_amount, receiver_currency) VALUES(?, ?, ?, ?, ?, ?, ?)',
         [$_POST['type_transaction'], 1, $_POST['amount'], $_POST['Currency'], 1, $_POST['amount'], $_POST['Currency']]
-    );
-}
+    );}
 else {
     // add iban
     $dbManager->insert(
