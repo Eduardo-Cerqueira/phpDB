@@ -131,18 +131,20 @@ class DbManager
 
     function getById_advanced($id, string $className)
     {
-        $sql = 'INSERT INTO ' . strtolower($className). ' (';
-
+        $sql = 'SELECT * from ' . strtolower($className) . ' WHERE id = '. $id;
+        var_dump($sql);
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
-        $sth->execute([$id]);
+        $sth->execute();
         $data = $sth->fetch();
-
         $dataReturn = new $className;
 
         foreach ($data as $key => $value) {
             $dataReturn->$key = $value;
         }
+
+        
+
         return $dataReturn;
     }
 
