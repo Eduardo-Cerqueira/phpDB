@@ -1,3 +1,19 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  ...
+  <!-- Le reste du contenu -->
+  ...
+</body>
+
+
+
+
 <?php
 
 require_once __DIR__ . '/../../src/init.php';
@@ -28,3 +44,5 @@ if ($user['password'] !== $password) {
 $_SESSION['user_id'] = $user['id'];
 
 header('Location: /login.php');
+?>
+</html>
