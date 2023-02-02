@@ -10,7 +10,8 @@ CREATE TABLE
     `last_connection` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`),
     UNIQUE KEY `fullname` (`fullname`),
-    UNIQUE KEY `email` (`email`)
+    UNIQUE KEY `email` (`email`),
+    UNIQUE KEY `IBAN` (`IBAN`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
 
   CREATE TABLE
@@ -23,19 +24,30 @@ CREATE TABLE
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
 
   CREATE TABLE
-  `transaction` (
+  `transactions` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `type` varchar(255) NOT NULL,
-    `emitter_id` varchar(255) NOT NULL,
-    `emitter_amount` varchar(255) NOT NULL,
-    `emitter_currency` varchar(255) NOT NULL,
-    `receiver_id` varchar(255) NOT NULL,
-    `receiver_amount` varchar(255) NOT NULL,
-    `receiver_currency` varchar(255) NOT NULL,
+    `user_id` varchar(255) NOT NULL,
+    `amount` varchar(255) NOT NULL,
+    `currency` varchar(255) NOT NULL,
     `status` tinyint(1) DEFAULT NULL,
     `processed` tinyint(1) DEFAULT 0,
     `processed_at` datetime DEFAULT NULL,
-    `created_at` datetime DEFAULT current_timestamp(),
     `processed_by` varchar(255) DEFAULT NULL,
+    `created_at` datetime DEFAULT current_timestamp(),
+    PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB AUTO_INCREMENT = 15 DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
+
+  CREATE TABLE
+  `transfers` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `type` varchar(255) NOT NULL,
+    `sender` varchar(255) DEFAULT NULL,
+    `receiver` varchar(255) DEFAULT NULL,
+    `amount` varchar(255) NOT NULL,
+    `currency` varchar(255) NOT NULL,
+    `gain` tinyint(1) NOT NULL,
+    `status` tinyint(1) DEFAULT NULL,
+    `created_at` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB AUTO_INCREMENT = 15 DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
