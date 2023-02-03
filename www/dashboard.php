@@ -4,41 +4,46 @@ require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Dashboard';
 require_once __DIR__ . '/../src/partials/header.php';
-
-$id = 1;
-$i = 0;
-echo("Top 10");
 ?>
+<h2>Top 10</h2>
 <br><br>
 <?php
-$forms = $dbManager->select('SELECT * FROM transaction WHERE (emitter_id = ? AND receiver_id = ?) OR emitter_id = ? OR receiver_id = ?', 'Transaction', [$id,$id,$id,$id]);
-foreach ($forms as $key => $value) {
-    if ($i < 10) {
-    echo('Emitter : ');
-    echo($value->emitter_id);
-    echo(' Amount : ');
-    echo($value->emitter_amount);
-    echo(' Receiver : ');
-    echo($value->receiver_id);
-    echo(' Amount : ');
-    echo($value->receiver_amount);
-    ?>
-    <br>
-    <?php
-    $i++;
-    }
-    else {
-        break;
-    }
-}
+$tableau = $dbManager->select('SELECT "transfer" as "type", sender, receiver, created_by as "user_id", amount, currency, created_at FROM transfers WHERE created_by = ?
+UNION 
+SELECT type, "", "", user_id, amount, currency, created_at FROM transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT 10', 'Tableau', [$user['id'], $user['id']]);
 
-/*
-function sumAllTypeByID()
-$total = 0;
-$forms = $dbManager->select('SELECT * FROM transaction WHERE type = ? AND emitter_id = ?', 'Transaction', [$id,$type]);
-foreach ($forms as $key => $value) {
-    $total = $total + ($value->emitter_amount);
-}
-echo ($total)
-//echo($forms[0]->emitter_amount);
-?>*/
+if ($tableau) { ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($tableau as $transfer) { ?>
+                <tr>
+                    <?php foreach ($transfer as $key => $value) {
+                        if ($key == 'sender') {
+                            $senderName = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];
+                            echo "<td>$senderName->fullname</td>";
+                        } elseif($key == 'receiver'){
+                            $receiver = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];
+                            echo "<td>$receiver->fullname</td>";
+                        } elseif ($key != 'user_id') {
+                            echo "<td>$value</td>";
+                        }
+                    }
+                    ?>
+                </tr>
+            <?php } ?>
+
+        </tbody>
+    </table>
+<?php } else {
+    echo "<p> Vous n'avez aucunne transaction :|</p>";
+} ?>
