@@ -8,11 +8,16 @@ require_once __DIR__ . '/../src/partials/header.php';
 <h2>Top 10</h2>
 <br><br>
 <?php
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 0;
+}
 $tableau = $dbManager->select('SELECT "transfer" as "type", sender, receiver, created_by as "user_id", amount, currency, created_at FROM transfers WHERE created_by = ?
-UNION 
-SELECT type, "", "", user_id, amount, currency, created_at FROM transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT 10', 'Tableau', [$user['id'], $user['id']]);
+UNION
+SELECT type, "", "", user_id, amount, currency, created_at FROM transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT '. ($page * 10) .', 10', 'Tableau', [$user['id'], $user['id']]);
 
-if ($tableau) { ?>
+if ($tableau) {?>
     <table>
         <thead>
             <tr>
@@ -44,6 +49,17 @@ if ($tableau) { ?>
 
         </tbody>
     </table>
-<?php } else {
-    echo "<p> Vous n'avez aucunne transaction :|</p>";
-} ?>
+    <form method="post">
+        <?php if ($_GET['page'] > 0) {?>
+        <a href=http://localhost/dashboard.php?<?php $newpage = $page - 1; echo("page=".$newpage);?>><button type="button">previous</button></a>
+        <?php
+    }
+    ?>
+        <a href=http://localhost/dashboard.php?<?php $newpage = 0; echo("page=".$newpage);?>><button type="button">reset</button></a>
+        <?php if ($_GET['page'] < 2) {?>
+        <a href=http://localhost/dashboard.php?<?php $newpage = $page + 1; echo("page=".$newpage);?>><button type="button">next</button></a>
+        <?php
+    }
+}
+    ?>
+	</form>
