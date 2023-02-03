@@ -1,10 +1,4 @@
-<?php
 
-require_once __DIR__ . '/../src/init.php';
-
-$page_title = 'Dashboard';
-require_once __DIR__ . '/../src/partials/header.php';
-?>
 <h2>Top 10</h2>
 <br><br>
 <?php
@@ -18,7 +12,7 @@ UNION
 SELECT type, "", "", user_id, amount, currency, created_at FROM transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT '. ($page * 10) .', 10', 'Tableau', [$user['id'], $user['id']]);
 
 if ($tableau) {?>
-    <table>
+    <table class="table-style">
         <thead>
             <tr>
                 <th>Type</th>
@@ -31,7 +25,7 @@ if ($tableau) {?>
         </thead>
         <tbody>
             <?php foreach ($tableau as $transfer) { ?>
-                <tr>
+                <tr class="table-row-style">
                     <?php foreach ($transfer as $key => $value) {
                         if ($key == 'sender') {
                             $senderName = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];

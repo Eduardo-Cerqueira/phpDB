@@ -14,6 +14,9 @@
 			<li>
 				<a href="/index.php?pageName=user_panel">User panel</a>
 			</li>
+			<li>
+				<a href="/index.php?pageName=dashboard">dashboard</a>
+			</li>
 		<?php } ?>
 		<li>
 			<a href="/actions/logout.php">Logout</a>
