@@ -4,7 +4,6 @@
 
 $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR receiver = ? ', 'Transfers', [$user['IBAN'], $user['IBAN']]);
 ?>
-<form action="/actions/valid_depot.php" method="post">
     <?php if ($all_transfer) { ?>
         <table>
             <thead>
@@ -32,7 +31,6 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
                         ?>
                     </tr>
                 <?php } ?>
-
             </tbody>
         </table>
     <?php } else {
