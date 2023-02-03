@@ -1,0 +1,45 @@
+.table-style{
+	border-spacing: 0;
+	border: 1px solid #dbdbe1;
+	background-color: #ffffff;
+	border-radius: 10px;
+	width: 70%;
+    box-shadow: 0px 10px 15px 3px rgba(0,0,0,0.1);
+}
+
+.table-style thead th:first-child {
+    border-radius: 10px 0 0 0;
+}
+.table-style thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+
+.table-style thead th{
+	
+    border-bottom: 2px solid #dbdbe1;
+}
+
+.table-style th{
+	padding: 10px;
+	text-align: start;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 400;
+	color: #4b4b4b;
+}
+
+.table-row-style{
+	padding: 1em;
+	border: 1px solid #dbdbe1;
+}
+
+.table-row-style td{
+	padding: 10px;
+	color: #3a3a3a;
+	font-weight: 600;
+	
+}
+
+.table-row-style:nth-child(even){
+	background-color: #fafafa;
+}

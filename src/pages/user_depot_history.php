@@ -2,7 +2,7 @@
 
 <?php
 
-$all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND id = ?', 'Transactions', ['depot', $user['id']]);
+$all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND user_id = ?', 'Transactions', ['depot', $user['id']]);
 ?>
 <form action="/actions/valid_depot.php" method="post">
     <?php if ($all_transac) { ?>

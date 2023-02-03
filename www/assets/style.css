@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap');
 body {
-	background-color: #393939;
-	color: rgb(228, 228, 228);
+	background-color: #ffffff;
+	color: #00080f;
+	font-family: 'Inter', sans-serif;
+	padding: 0 10%;
 }
 
 input, textarea {
@@ -31,3 +34,27 @@ input, textarea {
 .btn:active {
 	background-color: #ff9dff;
 }
+
+.nav-header {
+	display: flex;
+	justify-content: end;
+	column-gap: 20px;
+	margin-bottom: 10%;
+	padding: 1em 0;
+}
+
+.nav-header li{
+	display: inline-block;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 400;
+	color: #00080F;
+}
+
+.nav-header a{
+	text-decoration: none;
+}
+.nav-header a:visited{
+	color: #00080F;
+}
+

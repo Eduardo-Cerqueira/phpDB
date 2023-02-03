@@ -6,7 +6,7 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
 ?>
 <form action="/actions/valid_depot.php" method="post">
     <?php if ($all_transfer) { ?>
-        <table>
+        <table class="table-style">
             <thead>
                 <tr>
                     <th>Expediteur</th>
@@ -17,7 +17,7 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
             </thead>
             <tbody>
                 <?php foreach ($all_transfer as $transfer) { ?>
-                    <tr>
+                    <tr class="table-row-style">
                         <?php foreach ($transfer as $key => $value) {
                             if ($key == 'sender') {
                                 $senderName = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];

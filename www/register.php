@@ -16,7 +16,8 @@ require_once __DIR__ . '/../src/partials/header.php'; ?>
 	if ($errors !== false) {
 		echo '<p>'.$errors.'</p>';
 	} ?>
-	<form action="/actions/register.php" method="post">
+	<form action="/actions/register.php" method="post" class="login-form">
+		<span class="connexion">INSCRIPTION</span>
 		Pseudo : <input type="text" name="fullname"><br>
 		Email : <input type="text" name="email"><br>
 		Password : <input type="password" name="password"><br>

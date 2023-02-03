@@ -16,23 +16,28 @@ $loggedin_pages = ['home'];
 $everyone_pages = ['contact'];
 
 // page par defaut si on est co ou pas
-if ($user_id === false) {
+
+if(!isset($_GET['pageName'])){
+	$pageName = "home";
+}
+/*if ($user_id === false) {
 	$pageName = 'login';
 }
 else{
 	$pageName = 'home';
+}*/
+else{
+	if ($user_id !== false && in_array($_GET['pageName'], $loggedin_pages)) {
+		$pageName = $_GET["pageName"];
+	}
+	elseif ($user_id === false && in_array($_GET['pageName'], $guest_pages)) {
+		$pageName = $_GET['pageName'];
+	}
+	elseif (in_array($_GET['pageName'], $everyone_pages)) {
+		$pageName = $_GET['pageName'];
+	}
 }
-
-// verifier le contenu de $_GET['page'] ou $_GET['name']
-if ($user_id !== false && in_array($_GET['name'], $loggedin_pages)) {
-	$pageName = $_GET["name"];
-}
-elseif ($user_id === false && in_array($_GET['name'], $guest_pages)) {
-	$pageName = $_GET['name'];
-}
-elseif (in_array($_GET['name'], $everyone_pages)) {
-	$pageName = $_GET['name'];
-}
+//verifier le contenu de $_GET['page'] ou $_GET['name']
 
 $page_title = $pageTitles[$pageName];
 
