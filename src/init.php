@@ -11,6 +11,7 @@ require_once __DIR__ . '/class/Account.php';
 require_once __DIR__ . '/class/Currency.php';
 require_once __DIR__ . '/class/Transactions.php';
 require_once __DIR__ . '/class/Transfers.php';
+require_once __DIR__ . '/class/Tableau.php';
 
 // db manager
 require_once __DIR__ . '/class/DbManager.php';
