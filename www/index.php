@@ -7,13 +7,14 @@ $pageTitles = [
 	'home' => 'Accueil',
 	'admin_panel' => 'Manager panel',
 	'user_panel' => 'User panel',
-	'admin_register' => 'Manager register'
+	'admin_register' => 'Manager register',
+	'dashboard' => 'Dernières transactions'
 ];
 
 
 // pages accessibles si on est pas co
 $guest_pages = ['login', 'register'];
-$loggedin_pages = ['user_panel'];
+$loggedin_pages = ['user_panel', 'dashboard'];
 // pages qui sont accessibles a tous
 $everyone_pages = ['contact', 'home'];
 // pages qui sont accessibles aux managers
