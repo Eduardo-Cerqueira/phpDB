@@ -18,7 +18,7 @@ CREATE TABLE
   `currency` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
-    `multiplier` int(100) NOT NULL,
+    `multiplier` float NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci
@@ -28,7 +28,7 @@ CREATE TABLE
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `type` varchar(255) NOT NULL,
     `user_id` varchar(255) NOT NULL,
-    `amount` int(255) NOT NULL,
+    `amount` float NOT NULL,
     `currency` varchar(255) NOT NULL,
     `status` tinyint(1) DEFAULT NULL,
     `processed` tinyint(1) DEFAULT 0,
@@ -43,7 +43,7 @@ CREATE TABLE
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `sender` varchar(255) DEFAULT NULL,
     `receiver` varchar(255) DEFAULT NULL,
-    `amount` varchar(255) NOT NULL,
+    `amount` float NOT NULL,
     `currency` varchar(255) NOT NULL,
     `created_at` datetime DEFAULT current_timestamp(),
     `created_by` varchar(255) NOT NULL,
