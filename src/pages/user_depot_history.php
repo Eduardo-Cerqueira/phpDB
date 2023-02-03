@@ -44,3 +44,4 @@ $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND
     <?php } else {
         echo "<p> Vous n'avez aucun depots :(</p>";
     } ?>
+    </form>

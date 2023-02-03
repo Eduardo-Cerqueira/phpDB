@@ -4,7 +4,6 @@
 
 $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR receiver = ? ', 'Transfers', [$user['IBAN'], $user['IBAN']]);
 ?>
-<form action="/actions/valid_depot.php" method="post">
     <?php if ($all_transfer) { ?>
         <table class="table-style">
             <thead>
@@ -25,14 +24,13 @@ $all_transfer = $dbManager->select('SELECT * FROM transfers WHERE sender = ? OR 
                             }elseif($key == 'receiver'){
                                 $receiver = $dbManager->select('SELECT fullname FROM account WHERE IBAN = ?', 'Account', [$value])[0];
                                 echo "<td>$receiver->fullname</td>";
-                            }elseif ($key != 'created_at' && $key != 'type' && $key != 'id') {
+                            }elseif ($key != 'created_at' && $key != 'type' && $key != 'id' && $key != 'created_by') {
                                 echo "<td>$value</td>";
                             }
                         }
                         ?>
                     </tr>
                 <?php } ?>
-
             </tbody>
         </table>
     <?php } else {
