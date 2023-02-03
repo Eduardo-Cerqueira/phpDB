@@ -8,8 +8,8 @@ if ($_POST['type_transaction'] == 'transfer') {
     );}
 else {
     $dbManager->insert(
-        'INSERT INTO transactions(type, user_id, amount , currency) VALUES(?, ?, ?, ?)',
-        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['Currency']]
+        'INSERT INTO transactions(type, user_id, amount , currency, created_by) VALUES(?, ?, ?, ?, ?)',
+        [$_POST['type_transaction'], $user['id'], $_POST['amount'], $_POST['Currency'], $user['id']]
     );
 }
 

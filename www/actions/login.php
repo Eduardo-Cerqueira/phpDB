@@ -2,19 +2,26 @@
 
 require_once __DIR__ . '/../../src/init.php';
 
+
+unset($errors);
+
 if (!isset($_POST['email'], $_POST['password'])) {
-	set_errors('Pas de formulaire recu', '/login.php');
+	set_errors('Pas de formulaire recu', '/index.php?pageName=login');
 }
 
 if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
-	set_errors('Email invalide', '/login.php');
+	set_errors('Email invalide', '/index.php?pageName=login');
+}
+
+if(!$dbManager->getBy('account','email',$_POST['email'],'Account')->id){
+	set_errors('Email invalide', '/index.php?pageName=login');
 }
 
 $password = hash('sha256', $_POST['password']);
 
 // DEBUG
-// var_dump($_POST);
-// die();
+//var_dump($_POST);
+//die();
 
 $getby =  $dbManager->getBy('account','email',$_POST['email'],'Account');
 

@@ -1,4 +1,6 @@
 <?php
+$errors = get_errors();
+
 if (isset($errors)) {
 	echo '<p>'.$errors.'</p>';
 } ?>

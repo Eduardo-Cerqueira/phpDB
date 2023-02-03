@@ -2,22 +2,28 @@
 
 require_once __DIR__ . '/../../src/init.php';
 
+unset($errors);
 
 if (!isset($_POST['email'], $_POST['fullname'], $_POST['password'], $_POST['cpassword'])) {
-	set_errors('Pas de formulaire recu', '/register.php');
+	set_errors('Pas de formulaire recu', '/index.php?pageName=register');
 }
 
 if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
-	set_errors('Email invalide', '/register.php');
+	set_errors('Email invalide', '/index.php?pageName=register');
+}
+
+if($dbManager->getBy('account','email',$_POST['email'],'Account')->id){
+	set_errors('Email invalide', '/index.php?pageName=register');
 }
 
 if (empty($_POST['fullname']) || strlen($_POST['fullname']) > 100) {
-	set_errors('Fullname invalide', '/register.php');
+	set_errors('Fullname invalide', '/index.php?pageName=register');
 }
 
 if (empty($_POST['password']) || ($_POST['password'] !== $_POST['cpassword'])) {
-	set_errors('Message invalide', '/register.php');
+	set_errors('Mot de passe invalide', '/index.php?pageName=register');
 }
+
 
 $_POST['fullname'] = htmlentities($_POST['fullname'],  ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 $_POST['password'] = hash('sha256', $_POST['password']);
@@ -45,6 +51,7 @@ $new_account->fullname = $_POST['fullname'];
 $new_account->email = $_POST['email'];
 $new_account->password = $_POST['password'];
 $new_account->IBAN = genereriban();
+var_dump($new_account);
 try{
 	$idInsertedAdvanced = $dbManager->insert_advanced($new_account);
 }catch(PDOException $e){
@@ -55,4 +62,4 @@ try{
 
 // bonus : si on veut connecte l'utilisateur immediatement
 $_SESSION['user_id'] = $db->lastInsertId();
-header('Location: /index.php?pageName=home');
+header('Location: /index.php?pageName=login');
