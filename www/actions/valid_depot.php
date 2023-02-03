@@ -10,5 +10,5 @@ else if (isset($_POST['no'])) {
     $id = $_POST['no'];
 }
 $dbManager->update('transactions',['processed_at' => date('Y-m-d H:i:s'), 'status' => $status, 'processed_by' => $user['fullname'], 'processed' => 1], $id);
-header("Location: /../admin_panel.php");
+header('Location: /index.php?pageName=admin_panel');
 ?>

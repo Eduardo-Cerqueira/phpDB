@@ -1,5 +1,5 @@
 <?php
-if ($errors !== false) {
+if (isset($errors)) {
 	echo '<p>'.$errors.'</p>';
 } ?>
 <form action="/actions/login.php" method="post" class="login-form">

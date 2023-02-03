@@ -1,32 +1,22 @@
 <?php
-require_once __DIR__ . '/../src/init.php';
 
 $admin = $dbManager->select('SELECT * FROM account WHERE function = 1000', 'Account');
 
 if (empty($admin)) {
-    header('Location: /admin_register.php');
+    header('Location: index.php?pageName=login');
 } elseif ($_SESSION['user_function'] != 1000) {
-    header('Location: /login.php');
+    header('Location: index.php?pageName=login');
 }
 
-
-
-$page_title = 'Manager panel';
-require_once __DIR__ . '/../src/partials/header.php';
-
 ?>
-
-<body>
-    <?php require_once __DIR__ .  '/../src/partials/menu.php'; ?>
-
     <h2>Utilisateurs à confirmer :</h2>
 
     <?php
     $all_user = $dbManager->select('SELECT * FROM account WHERE function = ?', 'Account', [0]);
     if ($all_user) {
     ?>
-        <form action="/actions/valid_user.php" method="post">
-            <table>
+        <form action="/../actions/valid_user.php" method="post">
+            <table class="table-style">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -40,7 +30,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                 </thead>
                 <tbody>
                     <?php foreach ($all_user as $user) { ?>
-                        <tr>
+                        <tr class="table-row-style">
                             <?php foreach ($user as $key => $value) {
                                 if ($key != 'password' && $key != 'created_at') {
                                     echo "<td>$value</td>";
@@ -71,9 +61,9 @@ require_once __DIR__ . '/../src/partials/header.php';
 
         $all_transac = $dbManager->select('SELECT * FROM transactions WHERE type = ? AND processed = 0', 'Transactions', ['depot']);
         ?>
-        <form action="/actions/valid_depot.php" method="post">
+        <form action="/../actions/valid_depot.php" method="post">
             <?php if ($all_transac) { ?>
-                <table>
+                <table class="table-style">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -86,7 +76,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                     </thead>
                     <tbody>
                         <?php foreach ($all_transac as $transac) { ?>
-                            <tr>
+                            <tr class="table-row-style">
                                 <?php foreach ($transac as $key => $value) {
                                     if ($key == 'user_id') {
                                         $name = $dbManager->getById('account', $value, 'Account')->fullname;
@@ -119,7 +109,7 @@ require_once __DIR__ . '/../src/partials/header.php';
         ?>
         <form action="/actions/valid_withdraw.php" method="post">
             <?php if ($all_transac) { ?>
-                <table>
+                <table class="table-style">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -132,7 +122,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                     </thead>
                     <tbody>
                         <?php foreach ($all_transac as $transac) { ?>
-                            <tr>
+                            <tr class="table-row-style">
                                 <?php foreach ($transac as $key => $value) {
                                     if ($key == 'user_id') {
                                         $name = $dbManager->getById('account', $value, 'Account')->fullname;
@@ -156,6 +146,3 @@ require_once __DIR__ . '/../src/partials/header.php';
                 echo "<p> Vous n'avez aucun retraits à confirmer ! </p>";
             } ?>
         </form>
-
-        <?php require_once __DIR__ . '/../src/partials/footer.php'; ?>
-</body>

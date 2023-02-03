@@ -1,18 +1,18 @@
 <ul class="nav-header">
+	<li>
+		<a href="/index.php?pageName=home">Accueil</a>
+	</li>
 	<?php
 	if ($user) {
 	?>
-		<li>
-			<a href="/index.php">Accueil</a>
-		</li>
 		<?php
 		if ($user['function'] == 1000) { ?>
 			<li>
-				<a href="/admin_panel.php">Admin panel</a>
+				<a href="/index.php?pageName=admin_panel">Admin panel</a>
 			</li>
 		<?php }else{ ?>
 			<li>
-				<a href="/user_panel.php">User panel</a>
+				<a href="/index.php?pageName=user_panel">User panel</a>
 			</li>
 		<?php } ?>
 		<li>
@@ -20,10 +20,10 @@
 		</li>
 	<?php } else { ?>
 		<li>
-			<a href="/login.php">Login</a>
+			<a href="/index.php?pageName=login">Login</a>
 		</li>
 		<li>
-			<a href="/register.php">Register</a>
+			<a href="/index.php?pageName=register">Register</a>
 		</li>
 	<?php } ?>
 </ul>

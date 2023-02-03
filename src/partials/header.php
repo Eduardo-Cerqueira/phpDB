@@ -8,5 +8,5 @@
 	<link rel="stylesheet" href="/assets/style.css">
 	<link rel="stylesheet" href="/assets/login-register.css">
 	<link rel="stylesheet" href="/assets/table.css">
-	*<link rel="stylesheet" href="/assets/recap.css">
+	<link rel="stylesheet" href="/assets/recap.css">
 </head>
