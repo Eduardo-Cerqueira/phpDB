@@ -1,7 +1,7 @@
 <h2>Récapitulatif de votre compte :</h2>
 
 <?php
-echo "<h3> IBAN : $user[IBAN] </h3>";
+echo "<h3> <span class='IBAN'>IBAN</span> : $user[IBAN] </h3>";
 
 //récupération de toutes les currency dispo sur le site
 $all_currency = array();
@@ -47,12 +47,12 @@ foreach ($withdrawMoney as $key => $value) {
 }
 ?>
 
-<ul>
+<ul class="user-currency">
     <?php
     foreach ($all_currency as $key => $value) {
     ?>
         <li>
-            <?php echo $value . ' ' . $key; ?>
+            <?php echo $value . ' <span class="currency">' . $key . '</span>'; ?>
         </li>
     <?php }?>
 </ul>

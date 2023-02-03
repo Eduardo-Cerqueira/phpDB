@@ -1,4 +1,4 @@
-<ul>
+<ul class="nav-header">
 	<?php
 	if ($user) {
 	?>
