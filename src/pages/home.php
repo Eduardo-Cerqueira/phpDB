@@ -1,3 +1,3 @@
 <div>
-	Email: <?php echo $user['email']; ?>
+	<h1>Home</h1>
 </div>

@@ -13,4 +13,4 @@ else {
     );
 }
 
-header("Location: /../user_panel.php");
+header("Location: /index.php?pageName=user_panel");

@@ -131,7 +131,7 @@ class DbManager
 
     function getById_advanced($id, string $className)
     {
-        $sql = 'INSERT INTO ' . strtolower($className). ' (';
+        $sql = ('SELECT * FROM ' . strtolower($className) . ' WHERE id = ?');
 
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);

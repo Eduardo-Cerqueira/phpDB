@@ -19,11 +19,11 @@ $password = hash('sha256', $_POST['password']);
 $getby =  $dbManager->getBy('account','email',$_POST['email'],'Account');
 
 if ($getby->password !== $password) {
-	set_errors('Mauvais mot de passe', '/login.php');
+	set_errors('Mauvais mot de passe', '/index.php?pageName=login');
 }
 
 $_SESSION['user_id'] = $getby->id;
 $_SESSION['user_function'] = $getby->function;
 
 
-header('Location: /login.php');
+header('Location: /index.php?pageName=home');
