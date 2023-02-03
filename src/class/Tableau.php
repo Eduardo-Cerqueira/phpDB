@@ -1,12 +1,13 @@
 <?php
 
-class Transfers extends DbObject {
-    public $id;
-	public $sender;
+class Tableau extends DbObject {
+    public $type;
+    public $sender;
     public $receiver;
+    public $user_id;
     public $amount;
     public $currency;
     public $created_at;
-    public $created_by;
 }
+
 ?>
