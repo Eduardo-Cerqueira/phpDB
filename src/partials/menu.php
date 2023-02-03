@@ -17,6 +17,9 @@
 			<li>
 				<a href="/index.php?pageName=dashboard">dashboard</a>
 			</li>
+			<li>
+				<a href="/index.php?pageName=convert">conversions</a>
+			</li>
 		<?php } ?>
 		<li>
 			<a href="/actions/logout.php">Logout</a>

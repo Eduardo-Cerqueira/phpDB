@@ -45,13 +45,13 @@ if ($tableau) {?>
     </table>
     <form method="post">
         <?php if ($_GET['page'] > 0) {?>
-        <a href=http://localhost/dashboard.php?<?php $newpage = $page - 1; echo("page=".$newpage);?>><button type="button">previous</button></a>
+        <a href=http://localhost/index.php?pageName=dashboard&<?php $newpage = $page - 1; echo("page=".$newpage);?>><button type="button">previous</button></a>
         <?php
     }
     ?>
-        <a href=http://localhost/dashboard.php?<?php $newpage = 0; echo("page=".$newpage);?>><button type="button">reset</button></a>
+        <a href=http://localhost/index.php?pageName=dashboard&<?php $newpage = 0; echo("page=".$newpage);?>><button type="button">reset</button></a>
         <?php if ($_GET['page'] < 2) {?>
-        <a href=http://localhost/dashboard.php?<?php $newpage = $page + 1; echo("page=".$newpage);?>><button type="button">next</button></a>
+        <a href=http://localhost/index.php?pageName=dashboard&<?php $newpage = $page + 1; echo("page=".$newpage);?>><button type="button">next</button></a>
         <?php
     }
 }
