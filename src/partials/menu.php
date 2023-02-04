@@ -15,7 +15,10 @@
 				<a href="/index.php?pageName=user_panel">User panel</a>
 			</li>
 			<li>
-				<a href="/index.php?pageName=dashboard">dashboard</a>
+				<a href="/index.php?pageName=dashboard&page=0">dashboard</a>
+			</li>
+			<li>
+				<a href="/index.php?pageName=convert">conversions</a>
 			</li>
 		<?php } ?>
 		<li>
